@@ -49,7 +49,17 @@ const onInput = e => {
     emptyField();
   } else {
     fetchCountries(query)
+      .then(query =>
+        query.map(item => ({
+          name: item.name.official,
+          flag: item.flags.svg,
+          capital: item.capital,
+          languages: item.languages,
+          population: item.population,
+        })),
+      )
       .then(afterFeatch)
+
       .catch(onError);
   }
 };
